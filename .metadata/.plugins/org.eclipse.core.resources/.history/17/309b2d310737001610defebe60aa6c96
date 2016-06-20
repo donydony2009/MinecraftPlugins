@@ -1,0 +1,32 @@
+name: CustomInventories
+main: dony.ItemRemover.ItemRemover
+version: 1.0
+descripition: >
+   A plugin to remove any unwanted items
+commands:
+   banitem:
+        description: Bans an item
+   unbanitem: 
+        description: Unban item
+   createinv:
+        description: Creates an inventory
+   linkitem:
+        description: Links the item in your hand to an inventory
+   removeitemlink:
+        description: Deletes the item in your hand link
+   nameitem:
+        description: Names the item in hand
+   addlore:
+        description: Adds a lore to the item in hand
+   clearlore:
+        description: Delete the lore of the item in hand
+   addunsafeenchant:
+        description: Adds an unsafe enchant to the item in hand
+   linksign:
+        description: Links the sign you are looking at to a inventory
+   removesignlink:
+        description: Deletes the sign's link
+   togglepermneeded:
+        description: Toggles the Permission Needed tag
+   
+

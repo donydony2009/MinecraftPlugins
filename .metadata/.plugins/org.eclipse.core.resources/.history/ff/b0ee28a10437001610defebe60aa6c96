@@ -1,0 +1,5 @@
+package dony.ItemRemover;
+
+public class PlayerListener implements Listener{
+
+}

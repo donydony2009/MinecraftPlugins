@@ -1,0 +1,2 @@
+INDEX VERSION 1.127+D:\MinecraftPlugins\.metadata\.plugins\org.eclipse.jdt.core
+1433406245.index
