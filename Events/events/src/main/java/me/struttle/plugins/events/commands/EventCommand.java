@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import me.struttle.plugins.events.Events;
 
 public class EventCommand extends CommandBase{
-	Events m_Plugin;
 	public EventCommand() {
 		super(
 			new ArrayList<String>()
@@ -20,7 +19,6 @@ public class EventCommand extends CommandBase{
 				}
 			},
 			true);
-		m_Plugin = Events.GetInstance();
 	}
 
 	@Override

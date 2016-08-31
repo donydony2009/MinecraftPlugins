@@ -32,7 +32,7 @@ public class EventEndCommand extends CommandBase
 	@Override
 	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) 
 	{
-		Events.GetInstance().EndEvent();
+		m_Plugin.EndEvent();
 		player.sendMessage("Event ended successfully");
 		return true;
 	}

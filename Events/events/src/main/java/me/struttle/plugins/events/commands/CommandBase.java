@@ -5,12 +5,16 @@ import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import me.struttle.plugins.events.Events;
+import me.struttle.plugins.events.Log;
+
 public abstract class CommandBase {
 	protected List<String> m_CommandDefinition;
 	protected List<List<String>> m_Aliases;
 	protected List<String> m_Permissions;
 	protected String m_Definition;
 	protected boolean m_Strict = false;
+	protected Events m_Plugin;
 	
 	public CommandBase(List<String> commandDefinition, List<String> permissions, String definition, boolean strict, List<List<String>> aliases)
 	{
@@ -34,6 +38,7 @@ public abstract class CommandBase {
 	
 	public void Init(List<String> commandDefinition, List<String> permissions, String definition, boolean strict, List<List<String>> aliases)
 	{
+		m_Plugin = Events.GetInstance();
 		m_CommandDefinition = commandDefinition;
 		m_Aliases = aliases;
 		m_Permissions = permissions;

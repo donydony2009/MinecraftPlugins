@@ -29,6 +29,7 @@ public class Events extends JavaPlugin{
 		m_Commands.add(new EventLocationCommand());
 		m_Commands.add(new EventStartCommand());
 		m_Commands.add(new EventEndCommand());
+		m_Commands.add(new EventInventoryCommand());
 	}
 	
 	public static Events GetInstance()
@@ -65,14 +66,6 @@ public class Events extends JavaPlugin{
 		if(sender instanceof Player)
 		{
 			Player player = (Player) sender;
-			if(label.equalsIgnoreCase("SaveInventory"))
-			{
-				m_PluginSave.SavePlayerInventory(player);
-			}
-			else if(label.equalsIgnoreCase("LoadInventory"))
-			{
-				m_PluginSave.LoadPlayerInventory(player);
-			}
 			for(CommandBase commandExec : m_Commands)
 			{
 				commandExec.ExecuteCommand(player, label, args);
@@ -104,16 +97,35 @@ public class Events extends JavaPlugin{
 	
 	public void JoinEvent(Player player)
 	{
-		m_IsInEvent.put(player.getName(), true);
+		if(!IsInEvent(player))
+		{
+			SwitchToEventInventory(player);
+			m_IsInEvent.put(player.getName(), true);
+		}
 	}
 	
 	public void LeaveEvent(Player player)
 	{
-		m_IsInEvent.remove(player.getName());
+		if(IsInEvent(player))
+		{
+			SwitchToNormalInventory(player);
+			m_IsInEvent.remove(player.getName());
+		}
 	}
 	
 	public boolean IsInEvent(Player player)
 	{
 		return m_IsInEvent.containsKey(player.getName());
+	}
+	
+	public void SwitchToEventInventory(Player player)
+	{
+		GetConfig().SavePlayerInventory(player);
+		GetConfig().LoadEventInventory(player);
+	}
+	
+	public void SwitchToNormalInventory(Player player)
+	{
+		GetConfig().LoadPlayerInventory(player);
 	}
 }

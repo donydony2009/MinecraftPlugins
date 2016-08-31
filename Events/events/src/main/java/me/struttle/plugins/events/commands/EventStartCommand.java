@@ -27,15 +27,20 @@ public class EventStartCommand extends CommandBase{
 				}
 			},
 			true);
+		
 	}
 
 	@Override
 	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
 		Location outLocation = player.getLocation();
-		if(Events.GetInstance().GetConfig().LoadEventLocation(outLocation))
+		if(m_Plugin.GetConfig().LoadEventLocation(outLocation))
 		{
-			Events.GetInstance().StartEvent();
+			m_Plugin.StartEvent();
 			player.sendMessage(ChatColor.GREEN + "Event has started.");
+			if(m_Plugin.GetConfig().IsEventInventoryEmpty())
+			{
+				player.sendMessage(ChatColor.GOLD + "Warning! The inventory for the event is empty.");
+			}
 		}
 		else
 		{
