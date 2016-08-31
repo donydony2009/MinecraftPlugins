@@ -1,0 +1,64 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.List;
+
+import org.bukkit.Color;
+import org.bukkit.entity.Player;
+
+public abstract class CommandBase {
+	protected List<String> m_CommandDefinition;
+	protected List<List<String>> m_Aliases;
+	protected List<String> m_Permissions;
+	protected String m_Definition;
+	public boolean ExecuteCommand(Player player, String label, String[] args)
+	{
+		if(!Identify(m_CommandDefinition, label, args))
+		{
+			player.sendMessage(m_Definition);
+			return false;
+		}
+		
+		if(!CheckPermissions(player, m_Permissions))
+		{
+			player.sendMessage(Color.RED + "You don't have enough permission to execute that command.");
+			return false;
+		}
+		
+		ExecuteInternal(Player player, String[] args, int index)
+	}
+	
+	public abstract boolean ExecuteInternal(Player player, String[] args, int index);
+	
+	public boolean Identify(List<String> commandDefinition, String label, String[] args)
+	{
+		if(commandDefinition.size() <= 1 + args.length)
+		{
+			return false;
+		}
+		if(!commandDefinition.get(0).equalsIgnoreCase(label))
+		{
+			return false;
+		}
+		for(int i = 1; i < args.length; i++)
+		{
+			if(!commandDefinition.get(i).equalsIgnoreCase(args[i - 1]))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean CheckPermissions(Player player, List<String> permissions)
+	{
+		for(String permission : permissions)
+		{
+			if(!player.hasPermission(permission))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+}
+

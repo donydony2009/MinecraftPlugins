@@ -1,0 +1,13 @@
+/.project
+/.classpath
+/.settings
+/target
+permissionsex-*/target
+/build.xml
+/build
+/bin
+/dist
+/.idea/
+/PermissionsEx.iml
+.DS_Store
+.*.swp

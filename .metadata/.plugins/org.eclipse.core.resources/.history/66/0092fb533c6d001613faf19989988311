@@ -1,0 +1,11 @@
+package me.struttle.plugins.events;
+
+import java.io.File;
+
+public class EventsConfig {
+	CustomConfigFile m_SavedInventoriesConfig = null;
+	public EventsConfig(File dataFolder)
+	{
+		m_SavedInventoriesConfig new CustomConfigFile(dataFolder, "SavedInventories")
+	}
+}

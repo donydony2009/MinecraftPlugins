@@ -1,0 +1,30 @@
+package me.struttle.plugins.events;
+
+import java.util.List;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+
+public class PlayerListener implements Listener{
+	@EventHandler
+    public void PlayerCommand(PlayerCommandPreprocessEvent event) {
+        Player p = event.getPlayer();
+        if(!event.getMessage().equalsIgnoreCase("spawn"))
+        {
+        	event.setCancelled(true);
+        }
+        if (p.hasPermission("restrictor.bypass")) {
+            event.setCancelled(false);
+        } else if (p.hasPermission("restrictor.commands.block")) {
+            List<String> cmds = .getConfig().getStringList("BlockedCommands");
+            for (String command : cmds) {
+                if (command.equalsIgnoreCase("/ " + plugin.getConfig().getStringList("BlockedCommands"))) {
+                    event.setCancelled(true);
+                    p.sendMessage("test");
+                }
+            }
+        }
+    }
+}

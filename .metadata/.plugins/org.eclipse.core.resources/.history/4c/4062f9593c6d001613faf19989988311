@@ -1,0 +1,33 @@
+package me.struttle.plugins.events;
+
+import java.io.File;
+
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+public class EventsConfig {
+	CustomConfigFile m_SavedInventoriesConfig = null;
+	public EventsConfig(File dataFolder)
+	{
+		m_SavedInventoriesConfig = new CustomConfigFile(dataFolder, "SavedInventories")
+	}
+	
+
+	private void SavePlayerInventory(Player player)
+	{
+		for(int i = 0; i < player.getInventory().getSize(); i++)
+		{
+			m_SavedInventoriesConfig.Get().set("inventories." + player.getName() + "." + i, player.getInventory().getItem(i));
+		}
+		m_SavedInventoriesConfig.Save();
+	}
+	
+	private void LoadPlayerInventory(Player player)
+	{
+		for(int i = 0; i < player.getInventory().getSize(); i++)
+		{
+			ItemStack item = m_SavedInventoriesConfig.Get().getItemStack("inventories." + player.getName() + "." + i);
+			player.getInventory().setItem(i, item);
+		}
+	}
+}

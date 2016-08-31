@@ -1,0 +1,10 @@
+package me.struttle.plugins.events;
+
+public class CustomConfigFile {
+	private FileConfiguration customConfig = null;
+	private File customConfigFile = null;
+	public CustomConfigFile(String name)
+	{
+		
+	}
+}

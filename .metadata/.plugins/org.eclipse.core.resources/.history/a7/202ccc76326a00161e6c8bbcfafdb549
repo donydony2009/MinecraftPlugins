@@ -1,0 +1,14 @@
+package me.struttle.plugins.events;
+
+public class Log {
+	private static Logger ms_Logger;
+	private static boolean ms_Initialized;
+	public static void Initalize(Logger logger)
+	{
+		ms_Logger = logger
+	}
+	public static void Error(String string)
+	{
+		
+	}
+}

@@ -1,0 +1,10 @@
+name: Events
+main: me.struttle.plugins.events.Events
+version: 1.0
+descripition: >
+   This plugin will take care of the events
+commands:
+   saveinventory:
+        description: saves an inventory
+   
+

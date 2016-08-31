@@ -1,0 +1,16 @@
+package me.struttle.plugins.events;
+
+import java.util.logging.Logger;
+
+public class Log {
+	private static Logger ms_Logger = null;
+	private static boolean ms_Initialized;
+	public static void Initalize(Logger logger)
+	{
+		ms_Logger = logger;
+	}
+	public static void Error(String string)
+	{
+		if(ms_i)
+	}
+}

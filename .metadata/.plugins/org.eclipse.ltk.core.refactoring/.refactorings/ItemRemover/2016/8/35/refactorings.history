@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;plugin.yml&apos; to &apos;events/src/main/java&apos;&#x0D;&#x0A;- Original project: &apos;ItemRemover&apos;&#x0D;&#x0A;- Destination element: &apos;events/src/main/java&apos;&#x0D;&#x0A;- Original element: &apos;plugin.yml&apos;" description="Copy file" destination="=events/src\/main\/java" element1="plugin.yml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1472067934192" units="0" version="1.0"/>
+</session>

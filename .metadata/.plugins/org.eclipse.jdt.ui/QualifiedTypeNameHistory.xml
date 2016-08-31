@@ -15,4 +15,5 @@
 <fullyQualifiedTypeName name="org.bukkit.permissions.Permission"/>
 <fullyQualifiedTypeName name="net.md_5.bungee.api.ChatColor"/>
 <fullyQualifiedTypeName name="org.bukkit.ChatColor"/>
+<fullyQualifiedTypeName name="org.spongepowered.api.event.message.MessageEvent"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,16 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.List;
+
+public abstract class CommandBase {
+	protected List<String> m_CommandDefinition;
+	protected List<List<String>> m_Aliases;
+	protected List<String> m_Permissions;
+	protected String m_Definition;
+	public boolean ExecuteCommand(String label, String[] args)
+	{
+		if(m_CommandDefinition)
+	}
+	
+	public boolean ExecuteInternal(String[] args, int index);
+}

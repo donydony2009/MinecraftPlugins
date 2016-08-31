@@ -1,0 +1,12 @@
+name: ItemRemover
+main: dony.ItemRemover.ItemRemover
+version: 1.0
+descripition: >
+   A plugin to remove any unwanted items
+commands:
+   banitem:
+        description: Bans an item
+   unbanitem: 
+        description: Unban item
+   
+

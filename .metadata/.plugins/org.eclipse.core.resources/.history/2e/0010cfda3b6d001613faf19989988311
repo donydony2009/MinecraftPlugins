@@ -1,0 +1,31 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.entity.Player;
+
+public class EventLocationCommand extends CommandBase{
+
+	public EventLocationCommand(new ArrayList<String>()
+	{
+		super(
+				new ArrayList<String>()
+				{
+					private static final long serialVersionUID = 1L;
+					{
+						add("event");
+						add("location");
+					}
+				},
+				false);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

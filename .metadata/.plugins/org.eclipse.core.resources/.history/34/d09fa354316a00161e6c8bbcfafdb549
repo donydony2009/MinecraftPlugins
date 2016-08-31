@@ -1,0 +1,46 @@
+package me.struttle.plugins.events;
+
+import java.io.File;
+
+import org.bukkit.configuration.file.FileConfiguration;
+
+public class CustomConfigFile {
+	private FileConfiguration customConfig = null;
+	private File customConfigFile = null;
+	public CustomConfigFile(File dataFolder, String name)
+	{
+		
+	}
+	
+	public void reloadCustomConfig() {
+	    if (customConfigFile == null) {
+	    customConfigFile = new File(getDataFolder(), "customConfig.yml");
+	    }
+	    customConfig = YamlConfiguration.loadConfiguration(customConfigFile);
+
+	    // Look for defaults in the jar
+	    Reader defConfigStream = new InputStreamReader(this.getResource("customConfig.yml"), "UTF8");
+	    if (defConfigStream != null) {
+	        YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+	        customConfig.setDefaults(defConfig);
+	    }
+	}
+	
+	public FileConfiguration getCustomConfig() {
+	    if (customConfig == null) {
+	        reloadCustomConfig();
+	    }
+	    return customConfig;
+	}
+	
+	public void saveCustomConfig() {
+	    if (customConfig == null || customConfigFile == null) {
+	        return;
+	    }
+	    try {
+	        getCustomConfig().save(customConfigFile);
+	    } catch (IOException ex) {
+	        getLogger().log(Level.SEVERE, "Could not save config to " + customConfigFile, ex);
+	    }
+	}
+}

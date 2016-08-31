@@ -1,0 +1,19 @@
+package me.struttle.plugins.events;
+
+public class PlayerListener implements Listener{
+	@EventHandler
+    public void PlayerCommand(PlayerCommandPreprocessEvent event) {
+        Player p = event.getPlayer();
+        if (p.hasPermission("restrictor.bypass")) {
+            event.setCancelled(false);
+        } else if (p.hasPermission("restrictor.commands.block")) {
+            List<String> cmds = plugin.getConfig().getStringList("BlockedCommands");
+            for (String command : cmds) {
+                if (command.equalsIgnoreCase("/ " + plugin.getConfig().getStringList("BlockedCommands"))) {
+                    event.setCancelled(true);
+                    p.sendMessage("test");
+                }
+            }
+        }
+    }
+}

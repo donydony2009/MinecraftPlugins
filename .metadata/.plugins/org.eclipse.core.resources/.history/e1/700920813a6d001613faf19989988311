@@ -1,0 +1,12 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class EventCommand extends CommandBase{
+
+	public EventCommand() {
+		super(new ArrayList<String>(){add("event")});
+	}
+
+}

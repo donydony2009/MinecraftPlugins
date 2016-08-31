@@ -1,0 +1,34 @@
+package me.struttle.plugins.events;
+
+import java.util.List;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
+
+public class PlayerListener implements Listener{
+	Events plugin;
+	public PlayerListener()
+	{
+		plugin = Events.GetInstance();
+	}
+	@EventHandler
+    public void OnPlayerCommand(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+        if(!event.getMessage().equalsIgnoreCase("spawn"))
+        {
+        	event.setCancelled(true);
+        }
+    }
+	
+	@EventHandler
+    public void OnPlayerTeleport(PlayerTeleportEvent event) {
+        Player player = event.getPlayer();
+        if(plugin.EventIsStarted())
+        {
+        	plugin.LeaveEvent(player);
+        }
+    }
+}
