@@ -1,6 +1,9 @@
 package me.struttle.plugins.events;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -86,5 +89,30 @@ public class EventsConfig {
 	public boolean IsEventInventoryEmpty()
 	{
 		return !m_Config.Get().contains("inventory");
+	}
+	
+	public void SavePlayersToSendToSpawn(ArrayList<UUID> list)
+	{
+		ArrayList<String> toSave = new ArrayList<String>();
+		for(UUID entry : list)
+		{
+			toSave.add(entry.toString());
+		}
+		m_Config.Get().set("playersToRespawn", toSave);
+		m_Config.Save();
+	}
+	
+	public ArrayList<UUID> LoadPlayerToSendToSpawn()
+	{
+		List<String> list = m_Config.Get().getStringList("playersToRespawn");
+		ArrayList<UUID> result = new ArrayList<UUID>();
+		if(list != null)
+		{
+			for(String entry : list)
+			{
+				result.add(UUID.fromString(entry));
+			}
+		}
+		return result;
 	}
 }

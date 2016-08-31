@@ -4,8 +4,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class PlayerListener implements Listener{
@@ -32,9 +34,35 @@ public class PlayerListener implements Listener{
     }
 	
 	@EventHandler
-	public void OnPlayerDeath(PlayerDeathEvent event)
+	public void OnPlayerRespawn(PlayerRespawnEvent event)
 	{
-		Player player = event.getEntity();
+		Player player = event.getPlayer();
 		m_Plugin.LeaveEvent(player);
+	}
+	
+	@EventHandler
+	public void OnPlayerDisconnect(PlayerQuitEvent event)
+	{
+		Player player = event.getPlayer();
+		m_Plugin.m_PlayersToSendToSpawn.add(player.getUniqueId());
+		m_Plugin.GetConfig().SavePlayersToSendToSpawn(m_Plugin.m_PlayersToSendToSpawn);
+		m_Plugin.LeaveEvent(player);
+	}
+	
+	@EventHandler
+	public void OnPlayerJoin(PlayerJoinEvent event)
+	{
+		Player player = event.getPlayer();
+		if(player.isDead())
+		{
+			m_Plugin.m_IsInEvent.put(player.getUniqueId(), true);
+		}
+		else
+		{
+			if(m_Plugin.m_PlayersToSendToSpawn.contains(player.getUniqueId()))
+			{
+				player.teleport(player.getWorld().getSpawnLocation());
+			}
+		}
 	}
 }

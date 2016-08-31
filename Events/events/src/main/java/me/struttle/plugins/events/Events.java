@@ -3,6 +3,8 @@ package me.struttle.plugins.events;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,7 +18,8 @@ public class Events extends JavaPlugin{
 	
 	EventsConfig m_PluginSave = new EventsConfig(getDataFolder());
 	List<CommandBase> m_Commands = new ArrayList<CommandBase>();
-	HashMap<String, Boolean> m_IsInEvent = new HashMap<String, Boolean>();
+	public HashMap<UUID, Boolean> m_IsInEvent = new HashMap<UUID, Boolean>();
+	public ArrayList<UUID> m_PlayersToSendToSpawn;
 	PlayerListener m_PlayerListener = null;
 	private static Events m_Instance = null;
 	private boolean m_EventIsOn = false;
@@ -48,6 +51,7 @@ public class Events extends JavaPlugin{
 		
 		m_EventIsOn = false;
 		m_IsInEvent.clear();
+		m_PlayersToSendToSpawn = GetConfig().LoadPlayerToSendToSpawn();
 		
 		super.onEnable();
 	}
@@ -91,8 +95,19 @@ public class Events extends JavaPlugin{
 	
 	public void EndEvent()
 	{
-		m_IsInEvent.clear();
 		m_EventIsOn = false;
+		for(Entry<UUID, Boolean> entry : m_IsInEvent.entrySet())
+		{
+			Player player = getServer().getPlayer(entry.getKey());
+			
+			if(player != null)
+			{
+				SwitchToNormalInventory(player);
+				player.teleport(player.getWorld().getSpawnLocation());
+			}
+		}
+		m_IsInEvent.clear();
+		
 	}
 	
 	public void JoinEvent(Player player)
@@ -100,7 +115,7 @@ public class Events extends JavaPlugin{
 		if(!IsInEvent(player))
 		{
 			SwitchToEventInventory(player);
-			m_IsInEvent.put(player.getName(), true);
+			m_IsInEvent.put(player.getUniqueId(), true);
 		}
 	}
 	
@@ -109,13 +124,13 @@ public class Events extends JavaPlugin{
 		if(IsInEvent(player))
 		{
 			SwitchToNormalInventory(player);
-			m_IsInEvent.remove(player.getName());
+			m_IsInEvent.remove(player.getUniqueId());
 		}
 	}
 	
 	public boolean IsInEvent(Player player)
 	{
-		return m_IsInEvent.containsKey(player.getName());
+		return m_IsInEvent.containsKey(player.getUniqueId());
 	}
 	
 	public void SwitchToEventInventory(Player player)
