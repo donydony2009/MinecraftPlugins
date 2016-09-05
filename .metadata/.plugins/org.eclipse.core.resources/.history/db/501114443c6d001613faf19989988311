@@ -1,5 +1,0 @@
-package me.struttle.plugins.events;
-
-public class EventsConfig {
-	CustomConfigFile m_SavedInventoriesConfig = new CustomConfigFile(getDataFolder(), "SavedInventories");
-}

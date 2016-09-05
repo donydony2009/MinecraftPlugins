@@ -1,0 +1,62 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
+
+import net.md_5.bungee.api.ChatColor;
+
+public class EventSetCornerCommand extends CommandBase {
+	private Vector m_FirstCorner = null;
+	public EventSetCornerCommand() 
+	{
+		super(
+			new ArrayList<String>()
+			{
+				private static final long serialVersionUID = 1L;
+				{
+					add("event");
+					add("setcorner");
+				}
+			},
+			new ArrayList<String>()
+			{
+				private static final long serialVersionUID = 1L;
+				{
+					add("event.admin");
+				}
+			},
+			true);
+	}
+	
+	Vector GetPosition(Block block)
+	{
+		return new Vector(block.getX(), block.getY(), block.getZ());
+	}
+	
+	@Override
+	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
+		if(m_FirstCorner == null)
+		{
+			List<Block> blocks = player.getLineOfSight((Set<Material>)null, 10);
+			if(blocks.isEmpty())
+			{
+				player.sendMessage(ChatColor.DARK_RED + "There is no block in your line of sight");
+			}
+			else
+			{
+				m_FirstCorner = GetPosition(0);
+			}
+			
+		}
+		
+		
+		return true;
+	}
+
+}

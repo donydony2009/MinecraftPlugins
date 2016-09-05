@@ -1,0 +1,44 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.ArrayList;
+
+import org.bukkit.entity.Player;
+
+import com.mysql.jdbc.log.Log;
+
+import me.struttle.plugins.events.helper.LogLevel;
+
+public class EventLogLevelCommand extends CommandBase {
+	
+	public EventLogLevelCommand()
+	{
+		super(
+				new ArrayList<String>()
+				{
+					private static final long serialVersionUID = 1L;
+					{
+						add("event");
+						add("loglevel");
+					}
+				},
+				new ArrayList<String>()
+				{
+					private static final long serialVersionUID = 1L;
+					{
+						add("event.admin");
+					}
+				},
+				true);
+	}
+	
+	@Override
+	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
+		String level = args[indexStartingArguments];
+		if(level.compareToIgnoreCase("debug") == 0)
+		{
+			Log.ms_LogLevel = LogLevel.Debug
+		}
+		return false;
+	}
+
+}

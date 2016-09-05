@@ -1,0 +1,71 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.ArrayList;
+
+import org.bukkit.entity.Player;
+
+import me.struttle.plugins.events.helper.Log;
+import me.struttle.plugins.events.helper.LogLevel;
+import net.md_5.bungee.api.ChatColor;
+
+public class EventLogLevelCommand extends CommandBase {
+	
+	public EventLogLevelCommand()
+	{
+		super(
+				new ArrayList<String>()
+				{
+					private static final long serialVersionUID = 1L;
+					{
+						add("event");
+						add("loglevel");
+					}
+				},
+				new ArrayList<String>()
+				{
+					private static final long serialVersionUID = 1L;
+					{
+						add("event.admin");
+					}
+				},
+				true);
+	}
+	
+	@Override
+	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
+		if(args.length >= indexStartingArguments)
+		{
+			player.sendMessage("Synatx: /event loglevel [level]");
+			return true;
+		}
+		String level = args[indexStartingArguments];
+		if(level.equalsIgnoreCase("debug"))
+		{
+			Log.ms_LogLevel = LogLevel.Debug;
+		}
+		else if(level.equalsIgnoreCase("info"))
+		{
+			Log.ms_LogLevel = LogLevel.Info;
+		}
+		else if(level.equalsIgnoreCase("warning"))
+		{
+			Log.ms_LogLevel = LogLevel.Warning;
+		}
+		else if(level.equalsIgnoreCase("error"))
+		{
+			Log.ms_LogLevel = LogLevel.Error;
+		}
+		else if(level.equalsIgnoreCase("nologs"))
+		{
+			Log.ms_LogLevel = LogLevel.NoLogs;
+		}
+		else 
+		{
+			player.sendMessage("The log level can be one of the following: Debug, Info, Warning, Error, NoLogs");
+			return true;
+		}
+		player.sendMessage(ChatColor.GREEN + "Log level changed successfully");
+		return true;
+	}
+
+}

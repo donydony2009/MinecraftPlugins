@@ -1,0 +1,46 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.ArrayList;
+import java.util.Set;
+
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
+
+public class EventSetCornerCommand extends CommandBase {
+	private Vector m_FirstCorner = null;
+	public EventSetCornerCommand() 
+	{
+		super(
+			new ArrayList<String>()
+			{
+				private static final long serialVersionUID = 1L;
+				{
+					add("event");
+					add("setcorner");
+				}
+			},
+			new ArrayList<String>()
+			{
+				private static final long serialVersionUID = 1L;
+				{
+					add("event.admin");
+				}
+			},
+			true);
+	}
+	
+	
+	@Override
+	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
+		if(m_FirstCorner == null)
+		{
+			List<Block> blocks = player.getLineOfSight((Set<Material>)null, 10);
+			m_FirstCorner = ;
+		}
+		
+		
+		return true;
+	}
+
+}

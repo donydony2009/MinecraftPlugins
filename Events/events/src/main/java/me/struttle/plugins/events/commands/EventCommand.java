@@ -3,10 +3,7 @@ package me.struttle.plugins.events.commands;
 import java.util.ArrayList;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
-import me.struttle.plugins.events.Events;
 
 public class EventCommand extends CommandBase{
 	public EventCommand() {
@@ -23,13 +20,10 @@ public class EventCommand extends CommandBase{
 
 	@Override
 	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
-		Location loc = player.getLocation();
 		if(m_Plugin.EventIsStarted() && 
-				m_Plugin.GetConfig().LoadEventLocation(loc))
+				m_Plugin.JoinEvent(player))
 		{
-			player.teleport(loc);
 			player.sendMessage(ChatColor.GREEN + "You have been teleported to the event");
-			m_Plugin.JoinEvent(player);
 		}
 		else
 		{

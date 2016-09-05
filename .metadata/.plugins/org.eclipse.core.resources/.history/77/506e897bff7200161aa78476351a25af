@@ -1,0 +1,5 @@
+package me.struttle.plugins.events.helper;
+
+public enum LogLevel {
+
+}

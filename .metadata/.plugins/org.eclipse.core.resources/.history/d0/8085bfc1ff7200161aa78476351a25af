@@ -1,0 +1,35 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.ArrayList;
+
+import org.bukkit.entity.Player;
+
+public class EventLogLevelCommand extends CommandBase {
+	
+	public EventLocationCommand()
+	{
+		super(
+				new ArrayList<String>()
+				{
+					private static final long serialVersionUID = 1L;
+					{
+						add("event");
+						add("setlocation");
+					}
+				},
+				new ArrayList<String>()
+				{
+					private static final long serialVersionUID = 1L;
+					{
+						add("event.admin");
+					}
+				},
+				true);
+	}
+	@Override
+	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

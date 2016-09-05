@@ -1,0 +1,60 @@
+package me.struttle.plugins.events.commands;
+
+import java.util.ArrayList;
+
+import org.bukkit.entity.Player;
+
+import me.struttle.plugins.events.helper.Log;
+import me.struttle.plugins.events.helper.LogLevel;
+
+public class EventLogLevelCommand extends CommandBase {
+	
+	public EventLogLevelCommand()
+	{
+		super(
+				new ArrayList<String>()
+				{
+					private static final long serialVersionUID = 1L;
+					{
+						add("event");
+						add("loglevel");
+					}
+				},
+				new ArrayList<String>()
+				{
+					private static final long serialVersionUID = 1L;
+					{
+						add("event.admin");
+					}
+				},
+				true);
+	}
+	
+	@Override
+	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
+		String level = args[indexStartingArguments];
+		if(level.equalsIgnoreCase("debug"))
+		{
+			Log.ms_LogLevel = LogLevel.Debug;
+		}
+		else if(level.equalsIgnoreCase("info"))
+		{
+			Log.ms_LogLevel = LogLevel.Info;
+		}
+		else if(level.equalsIgnoreCase("warning"))
+		{
+			Log.ms_LogLevel = LogLevel.Warning;
+		}
+		else if(level.equalsIgnoreCase("error"))
+		{
+			Log.ms_LogLevel = LogLevel.Error;
+		}
+		else if(level.equalsIgnoreCase("nologs"))
+		{
+			Log.ms_LogLevel = LogLevel.NoLogs;
+		}
+		else 
+		return false;
+	}
+
+}

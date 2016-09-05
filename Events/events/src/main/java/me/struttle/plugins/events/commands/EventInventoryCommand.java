@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import org.bukkit.entity.Player;
 
-import me.struttle.plugins.events.Events;
-
 public class EventInventoryCommand extends CommandBase {
 
 	public EventInventoryCommand() 

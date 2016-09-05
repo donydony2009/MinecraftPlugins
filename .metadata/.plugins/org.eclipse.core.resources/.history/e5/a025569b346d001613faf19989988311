@@ -1,8 +1,0 @@
-package me.struttle.plugins.events.commands;
-
-import java.util.List;
-
-public abstract class CommandBase {
-	protected List<String> m_CommandDefinition;
-	public void ExecuteCommand(String label, String[] args);
-}

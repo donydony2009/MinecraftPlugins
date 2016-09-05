@@ -1,0 +1,37 @@
+package me.struttle.plugins.events.helper;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class Log {
+	private static Logger ms_Logger = null;
+	public static LogLevel ms_LogLevel = LogLevel.Debug;
+	public static void Initalize(Logger logger)
+	{
+		ms_Logger = logger;
+	}
+	
+	public static void Debug(String string)
+	{
+		if(ms_Logger != null && ms_LogLevel.compareTo(LogLevel.Debug) <= 0)
+		{
+			ms_Logger.log(Level.INFO, string);
+		}
+	}
+	
+	public static void Error(String string)
+	{
+		if(ms_Logger != null && ms_LogLevel.compareTo(LogLevel.Error) <= 0)
+		{
+			ms_Logger.log(Level.SEVERE, string);
+		}
+	}
+	
+	public static void Error(String string, Exception ex)
+	{
+		if(ms_Logger != null && ms_LogLevel.compareTo(LogLevel.Error) <= 0)
+		{
+			ms_Logger.log(Level.SEVERE, string, ex);
+		}
+	}
+}

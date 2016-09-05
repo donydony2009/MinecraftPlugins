@@ -6,8 +6,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import me.struttle.plugins.events.Events;
-
 public class EventStartCommand extends CommandBase{
 	public EventStartCommand() {
 		super(
@@ -33,7 +31,7 @@ public class EventStartCommand extends CommandBase{
 	@Override
 	public boolean ExecuteInternal(Player player, String[] args, int indexStartingArguments) {
 		Location outLocation = player.getLocation();
-		if(m_Plugin.GetConfig().LoadEventLocation(outLocation))
+		if(m_Plugin.IsEventLocationSet() && m_Plugin.IsArenaDefined())
 		{
 			m_Plugin.StartEvent();
 			player.sendMessage(ChatColor.GREEN + "Event has started.");
@@ -44,7 +42,7 @@ public class EventStartCommand extends CommandBase{
 		}
 		else
 		{
-			player.sendMessage(ChatColor.DARK_RED + "You need to set the location first.");
+			player.sendMessage(ChatColor.DARK_RED + "You need to set the location and arena first.");
 		}
 		return true;
 	}

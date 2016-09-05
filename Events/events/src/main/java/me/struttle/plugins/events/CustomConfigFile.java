@@ -6,6 +6,8 @@ import java.io.IOException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import me.struttle.plugins.events.helper.Log;
+
 public class CustomConfigFile {
 	private FileConfiguration m_Config = null;
 	private File m_ConfigFile = null;

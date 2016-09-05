@@ -6,7 +6,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import me.struttle.plugins.events.Events;
-import me.struttle.plugins.events.Log;
 
 public abstract class CommandBase {
 	protected List<String> m_CommandDefinition;

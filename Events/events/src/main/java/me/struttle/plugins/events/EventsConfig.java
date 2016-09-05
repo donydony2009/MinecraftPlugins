@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+import me.struttle.plugins.events.helper.Log;
+import me.struttle.plugins.events.helper.Zone;
+
 public class EventsConfig {
 	CustomConfigFile m_Config = null;
 	public EventsConfig(File dataFolder)
@@ -51,18 +54,22 @@ public class EventsConfig {
 
 	public void SavePlayerInventory(Player player)
 	{
+		Log.Debug("Save Normal Inventory:");
 		for(int i = 0; i < player.getInventory().getSize(); i++)
 		{
 			m_Config.Get().set("inventories." + player.getName() + "." + i, player.getInventory().getItem(i));
+			Log.Debug("Saved on " + i + " - " + player.getInventory().getItem(i));
 		}
 		m_Config.Save();
 	}
 	
 	public void LoadPlayerInventory(Player player)
 	{
+		Log.Debug("Load Normal Inventory:");
 		for(int i = 0; i < player.getInventory().getSize(); i++)
 		{
 			ItemStack item = m_Config.Get().getItemStack("inventories." + player.getName() + "." + i);
+			Log.Debug("Loaded on " + i + " - " + item);
 			player.getInventory().setItem(i, item);
 		}
 	}
@@ -114,5 +121,27 @@ public class EventsConfig {
 			}
 		}
 		return result;
+	}
+	
+	public void SaveArenaLocation(Zone zone)
+	{
+		m_Config.Get().set("arena.firstCorner", zone.m_Corner1);
+		m_Config.Get().set("arena.secondCorner", zone.m_Corner2);
+	}
+	
+	public Zone LoadArenaLocation()
+	{
+		if(m_Config.Get().contains("arena.firstCorner") && m_Config.Get().contains("arena.secondCorner"))
+		{
+			Zone zone = new Zone(null, null);
+			zone.m_Corner1 = m_Config.Get().getVector("arena.firstCorner");
+			zone.m_Corner2 = m_Config.Get().getVector("arena.secondCorner");
+			m_Config.Save();
+			return zone;
+		}
+		else
+		{
+			return null;
+		}
 	}
 }
